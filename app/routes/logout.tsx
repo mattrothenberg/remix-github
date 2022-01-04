@@ -1,12 +1,10 @@
 import { ActionFunction, json, LoaderFunction, redirect } from "remix";
-import { sessionStorage } from "~/services/session.server";
+import { clearSession } from "~/services/auth.server";
 
 export let action: ActionFunction = async ({ request }) => {
   return redirect("/", {
     headers: {
-      "Set-Cookie": await sessionStorage.destroySession(
-        await sessionStorage.getSession()
-      ),
+      "Set-Cookie": await clearSession(),
     },
   });
 };

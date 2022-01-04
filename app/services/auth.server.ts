@@ -28,3 +28,7 @@ authenticator.use(
     }
   )
 );
+
+export async function clearSession() {
+  return await sessionStorage.destroySession(await sessionStorage.getSession());
+}
