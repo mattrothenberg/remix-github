@@ -11,7 +11,22 @@ import type { MetaFunction } from "remix";
 import styles from "./tailwind.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    {
+      href: "https://fonts.googleapis.com",
+      rel: "preconnect",
+    },
+    {
+      href: "https://fonts.gstatic.com",
+      rel: "preconnect",
+      crossOrigin: true,
+    },
+    {
+      href: "https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap",
+      rel: "stylesheet",
+    },
+    { rel: "stylesheet", href: styles },
+  ];
 }
 
 export const meta: MetaFunction = () => {

@@ -1,7 +1,11 @@
 module.exports = {
   content: ["./app/**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Readex Pro", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

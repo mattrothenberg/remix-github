@@ -1,7 +1,13 @@
 import { Endpoints } from "@octokit/types";
 
+export type IssueList =
+  Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
+
 export type RepositoryList =
   Endpoints["GET /users/{username}/repos"]["response"]["data"];
+
+export type RepoDetail =
+  Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 
 export interface User {
   accessToken: string;
