@@ -1,5 +1,5 @@
 import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
-import { LoaderFunction, useLoaderData, useParams } from "remix";
+import { LoaderFunction, useLoaderData, useParams, Link, Outlet } from "remix";
 import { requireUserSession } from "~/http.server";
 import { IssueList, RepoDetail } from "~/types";
 
@@ -56,16 +56,13 @@ export default function RepoDetail() {
                 <ul className="divide-y">
                   {data.issues.map((issue) => {
                     return (
-                      <li key={issue.id}>
-                        <a
-                          className="block p-2 text-sm"
-                          href={issue.html_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {issue.title}
-                        </a>
-                      </li>
+                      <Link
+                        className="block p-2 text-sm"
+                        key={issue.id}
+                        to={`issues/${issue.id}`}
+                      >
+                        {issue.title}
+                      </Link>
                     );
                   })}
                 </ul>

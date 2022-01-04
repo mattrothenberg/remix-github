@@ -19,7 +19,7 @@ export function links() {
     {
       href: "https://fonts.gstatic.com",
       rel: "preconnect",
-      crossOrigin: true,
+      crossOrigin: "true",
     },
     {
       href: "https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap",
