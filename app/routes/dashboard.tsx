@@ -1,30 +1,30 @@
-import { LoaderFunction, useLoaderData } from "remix";
-import { authenticator } from "~/services/auth.server";
+import { Form, LoaderFunction, useLoaderData } from "remix";
+import { requireUserSession } from "~/http.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  let user = await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
-
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("Authorization", `token ${user.accessToken}`);
-
-  const reposRes = await fetch(
+  const { user, client } = await requireUserSession(request);
+  const { data } = await client.get(
     `https://api.github.com/users/${user.displayName}/repos`,
     {
-      headers: requestHeaders,
+      headers: {
+        Authorization: `token ${user.accessToken}`,
+      },
     }
   );
-
-  const repos = await reposRes.json();
-
   return {
     user,
-    repos,
+    repos: data,
   };
 };
 
 export default function Dashboard() {
   const data = useLoaderData();
-  return <pre className="p-4">{JSON.stringify(data, null, 2)}</pre>;
+  return (
+    <div>
+      <Form action="/logout" method="post">
+        <button>Logout</button>
+      </Form>
+      <pre className="p-4">{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
 }
