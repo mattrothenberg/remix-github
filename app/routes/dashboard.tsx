@@ -12,5 +12,5 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Dashboard() {
-  return <div>You made it</div>;
+  return <div className="p-4">You made it</div>;
 }
