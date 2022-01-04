@@ -22,14 +22,18 @@ export async function requireUserSession(request: Request) {
       return response;
     },
     async function (error) {
-      console.error(error);
-      throw redirect("/login", {
-        headers: {
-          "Set-Cookie": await sessionStorage.destroySession(
-            await sessionStorage.getSession()
-          ),
-        },
-      });
+      if (error.response.status === 401) {
+        console.error(error);
+        throw redirect("/login", {
+          headers: {
+            "Set-Cookie": await sessionStorage.destroySession(
+              await sessionStorage.getSession()
+            ),
+          },
+        });
+      }
+
+      return Promise.reject(error);
     }
   );
 
