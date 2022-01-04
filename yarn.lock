@@ -806,6 +806,11 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -2655,6 +2660,38 @@ remark-rehype@^9.0.0:
     mdast-util-to-hast "^11.0.0"
     unified "^10.0.0"
 
+remix-auth-github@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remix-auth-github/-/remix-auth-github-1.0.0.tgz#9292bba669b595cc415925a243ba12af0c4abd7f"
+  integrity sha512-IvAFP3Aydl3z8gmZrCDmuDl456GuepI2i4JTx7rH2FqBha7qpJutJSmrWXk4XE3Y2c+SJWKD816SRn49PY5caA==
+  dependencies:
+    remix-auth "^3.0.0"
+    remix-auth-oauth2 "^1.0.0"
+
+remix-auth-oauth2@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/remix-auth-oauth2/-/remix-auth-oauth2-1.1.0.tgz#247cb8adfef8c3415090833c9f670d98638375b1"
+  integrity sha512-6TtABgU4dBFKq1wqbmkKBEFClGytdS2s+e+byUGT4oPZkurfPhjNoLYTPFkreVHvD9mMDv0Rj/shzq8jgmdhBg==
+  dependencies:
+    remix-auth "^3.1.0"
+    uuid "^8.3.2"
+
+remix-auth@^3.0.0, remix-auth@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/remix-auth/-/remix-auth-3.1.0.tgz#0e2e042dbaed807870c9c31cc34c7c0e32e00af8"
+  integrity sha512-KWBLV5pr0jOCuXjhZp1LHEtG9SR1SuLLzkI9MZuzg/un6P6edA9EKzT5LMQRHGoyiRDZ100wgMj8Dd0mw6950A==
+  dependencies:
+    remix-utils "^2.2.0"
+    uuid "^8.3.2"
+
+remix-utils@^2.2.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-2.4.0.tgz#a614508369a00fd77a0633fd636d76c1526ea58e"
+  integrity sha512-qwzlPwjvRHIrPULnl7AFZAbjku6sihid2412QLMc8bPC6mm1XpUKnJtebW30WtO6wgwQu2CAwhIFQ2HsBQLXTw==
+  dependencies:
+    type-fest "^2.5.2"
+    uuid "^8.3.2"
+
 remix@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/remix/-/remix-1.1.1.tgz#d81c5a2a6ceb94df59f7eeb14a85096b9984b62f"
@@ -2947,6 +2984,11 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
+type-fest@^2.5.2:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.8.0.tgz#39d7c9f9c508df8d6ce1cf5a966b0e6568dcc50d"
+  integrity sha512-O+V9pAshf9C6loGaH0idwsmugI2LxVNR7DtS40gVo2EXZVYFgz9OuNtOhgHLdHdapOEWNdvz9Ob/eeuaWwwlxA==
+
 type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
@@ -3101,6 +3143,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 uvu@^0.5.0:
   version "0.5.2"
