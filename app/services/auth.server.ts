@@ -14,11 +14,16 @@ authenticator.use(
     },
     async (payload) => {
       const { accessToken, profile } = payload;
+      const fullProfileRes = await fetch(
+        `https://api.github.com/users/${profile.displayName}`
+      );
+      const fullProfile = await fullProfileRes.json();
 
       return {
         accessToken,
         displayName: profile.displayName,
         id: profile.id,
+        ...fullProfile,
       };
     }
   )
