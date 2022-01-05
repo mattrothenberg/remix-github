@@ -1,4 +1,5 @@
-import { LoaderFunction, useLoaderData, Outlet, Link } from "remix";
+import { LoaderFunction, useLoaderData, Outlet, NavLink } from "remix";
+import { GoEye, GoIssueOpened, GoRepoForked, GoStar } from "react-icons/go";
 import { requireUserSession } from "~/http.server";
 import { RepositoryList, User } from "~/types";
 
@@ -33,19 +34,40 @@ export default function Dashboard() {
           <p className="text-sm text-gray-600">Repositories</p>
         </div>
         <div className="flex-1 overflow-y-scroll p-2">
-          <ul>
+          <ul className="divide-y divide-gray-100">
             {data.repos.map((repo) => {
               return (
                 <li key={repo.id}>
-                  <Link
-                    className="flex justify-between items-center text-sm px-2 py-2 hover:bg-gray-50"
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "bg-blue-700 text-white" : "hover:bg-gray-50"
+                      } p-3 group block rounded`
+                    }
                     to={`${repo.name}`}
                   >
-                    <span className="flex-1">{repo.name}</span>
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                      {repo.open_issues_count}
-                    </span>
-                  </Link>
+                    <p>{repo.name}</p>
+                    <div className="mt-1 text-xs opacity-50">
+                      <ul className="flex items-center space-x-3">
+                        <li className="flex items-center space-x-1">
+                          <GoRepoForked />
+                          <span>{repo.forks_count}</span>
+                        </li>
+                        <li className="flex items-center space-x-1">
+                          <GoStar />
+                          <span>{repo.stargazers_count}</span>
+                        </li>
+                        <li className="flex items-center space-x-1">
+                          <GoEye />
+                          <span>{repo.watchers_count}</span>
+                        </li>
+                        <li className="flex items-center space-x-1">
+                          <GoIssueOpened />
+                          <span>{repo.open_issues_count}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </NavLink>
                 </li>
               );
             })}
