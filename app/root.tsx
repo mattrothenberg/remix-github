@@ -8,7 +8,7 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 
-import styles from "./tailwind.css";
+import styles from "./tailwindy.css";
 
 export function links() {
   return [
