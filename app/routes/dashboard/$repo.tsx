@@ -38,10 +38,15 @@ export default function RepoDetailLayout() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="bg-white p-4 border-b flex-shrink-0">
-        <p className="text-sm text-gray-600">
+      <div className="bg-white h-12 flex items-center px-3 border-b flex-shrink-0">
+        <a
+          className="text-sm text-gray-600 hover:bg-gray-100 py-1 px-2 rounded-md"
+          target="_blank"
+          rel="noopener"
+          href={`https://github.com/${data.user.displayName}/${repo}`}
+        >
           {data.user.displayName} / {repo}
-        </p>
+        </a>
       </div>
       <div className="bg-white border-b flex-shrink-0 flex">
         <NavLink

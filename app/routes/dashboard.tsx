@@ -29,7 +29,7 @@ export default function Dashboard() {
   return (
     <div className="h-screen bg-gray-100 flex overflow-hidden">
       <aside className="w-[300px] flex-shrink-0 bg-white flex flex-col border-r">
-        <div className="p-4 border-b flex-shrink-0">
+        <div className="h-12 flex items-center px-4 border-b flex-shrink-0">
           <p className="text-sm text-gray-600">Repositories</p>
         </div>
         <div className="flex-1 overflow-y-scroll p-2">
