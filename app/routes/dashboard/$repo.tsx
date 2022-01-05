@@ -5,7 +5,6 @@ import { IssueList, RepoDetail, User } from "~/types";
 
 export interface RepoDetailLayoutLoaderData {
   repo: RepoDetail;
-  issues: IssueList;
   user: User;
 }
 
@@ -16,14 +15,10 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const { data: repo } = await client.get<RepoDetail>(
       `/repos/${user.displayName}/${params.repo}`
     );
-    const { data: issues } = await client.get(
-      `/repos/${user.displayName}/${params.repo}/issues`
-    );
 
     return {
       user,
       repo,
-      issues,
     };
   } catch (e) {
     throw new Response("Not Found", { status: 404 });
@@ -32,7 +27,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
 export default function RepoDetailLayout() {
   const data = useLoaderData<RepoDetailLayoutLoaderData>();
-  const { repo } = useParams();
+  const params = useParams();
+  const { repo } = params;
 
   return (
     <div className="flex flex-col w-full">
@@ -41,8 +37,13 @@ export default function RepoDetailLayout() {
           {data.user.displayName} / {repo}
         </p>
       </div>
+      <div className="bg-white p-4 border-b flex-shrink-0">
+        <Link to="issues">Issues</Link>
+      </div>
       <div className="flex-1 h-full overflow-y-auto">
-        <Outlet context={data} />
+        <div className="p-4">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
