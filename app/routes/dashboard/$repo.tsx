@@ -1,4 +1,5 @@
 import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
+import { Link } from "react-router-dom";
 import {
   LoaderFunction,
   useLoaderData,
@@ -34,6 +35,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 export default function RepoDetailLayout() {
   const data = useLoaderData<RepoDetailLayoutLoaderData>();
   const params = useParams();
+
   const { repo } = params;
 
   return (
@@ -49,6 +51,19 @@ export default function RepoDetailLayout() {
         </a>
       </div>
       <div className="bg-white border-b flex-shrink-0 flex">
+        <NavLink
+          end
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "border-blue-500"
+                : "border-transparent hover:border-gray-200"
+            } text-xs border-b-2  tracking-wide uppercase p-4 block`
+          }
+          to={`/dashboard/${repo}`}
+        >
+          Dashboard
+        </NavLink>
         <NavLink
           className={({ isActive }) =>
             `${
