@@ -1,6 +1,7 @@
-import { LoaderFunction, useLoaderData } from "remix";
+import { Link, LoaderFunction, useLoaderData, useParams } from "remix";
 import { requireUserSession } from "~/http.server";
 import { CommentList, IssueList } from "~/types";
+import { XIcon } from "@heroicons/react/solid";
 
 interface LoaderData {
   issue: IssueList[0];
@@ -26,6 +27,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function IssueDetail() {
+  const params = useParams();
+  const { repo } = params;
   const { issue, comments } = useLoaderData<LoaderData>();
 
   return (
@@ -33,7 +36,12 @@ export default function IssueDetail() {
       <div className="absolute inset-0 bg-gray-900/20 z-0"></div>
       <div className="fixed bg-white w-[400px] shadow-xl right-0 top-0 bottom-0 pointer-events-auto flex flex-col">
         <header className="border-b p-4 flex-shrink-0">
-          <h2 className="text-xl">{issue.title}</h2>
+          <div className="flex items-center space-x-2">
+            <Link to={`/dashboard/${repo}/issues`}>
+              <XIcon className="w-5 relative top-px" />
+            </Link>
+            <h2 className="text-xl">{issue.title}</h2>
+          </div>
         </header>
         <div className="flex-1">
           <ul>

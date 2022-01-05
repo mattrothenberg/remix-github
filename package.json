@@ -11,6 +11,7 @@
     "postinstall": "remix setup node"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.5",
     "@octokit/types": "^6.34.0",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
