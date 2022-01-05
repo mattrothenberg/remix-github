@@ -1,25 +1,27 @@
 import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
 import { LoaderFunction, useLoaderData, useParams, Link, Outlet } from "remix";
 import { requireUserSession } from "~/http.server";
-import { IssueList, RepoDetail } from "~/types";
+import { IssueList, RepoDetail, User } from "~/types";
 
 interface LoaderData {
   repo: RepoDetail;
   issues: IssueList;
+  user: User;
 }
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-  const { client } = await requireUserSession(request);
+  const { user, client } = await requireUserSession(request);
 
   try {
     const { data: repo } = await client.get<RepoDetail>(
-      `/repos/${params.user}/${params.repo}`
+      `/repos/${user.displayName}/${params.repo}`
     );
     const { data: issues } = await client.get(
-      `/repos/${params.user}/${params.repo}/issues`
+      `/repos/${user.displayName}/${params.repo}/issues`
     );
 
     return {
+      user,
       repo,
       issues,
     };
@@ -30,13 +32,13 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
 export default function RepoDetail() {
   const data = useLoaderData<LoaderData>();
-  const { user, repo } = useParams();
+  const { repo } = useParams();
 
   return (
     <div className="flex flex-col w-full">
       <div className="bg-white p-4 border-b flex-shrink-0">
         <p className="text-sm text-gray-600">
-          {user} / {repo}
+          {data.user.displayName} / {repo}
         </p>
       </div>
       <div className="flex-1 h-full overflow-y-auto">
@@ -77,12 +79,12 @@ export default function RepoDetail() {
 
 export const CatchBoundary: CatchBoundaryComponent = (props) => {
   const params = useParams();
-  const { repo, user } = params;
+  const { repo } = params;
 
   return (
     <div className="p-4">
       <p className="text-red-600 text-sm">
-        Couldn't find a repo at {user}/{repo}
+        Couldn't find a repo by the name {repo}.
       </p>
     </div>
   );

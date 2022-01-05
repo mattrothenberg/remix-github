@@ -39,7 +39,7 @@ export default function Dashboard() {
                 <li key={repo.id}>
                   <Link
                     className="block text-sm px-2 py-2 hover:bg-gray-50"
-                    to={`${data.user.displayName}/${repo.name}`}
+                    to={`${repo.name}`}
                   >
                     {repo.name}
                   </Link>
