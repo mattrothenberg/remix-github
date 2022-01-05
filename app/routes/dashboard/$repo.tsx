@@ -1,14 +1,13 @@
 import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
-import { Link } from "react-router-dom";
 import {
   LoaderFunction,
+  NavLink,
+  Outlet,
   useLoaderData,
   useParams,
-  Outlet,
-  NavLink,
 } from "remix";
 import { requireUserSession } from "~/http.server";
-import { IssueList, RepoDetail, User } from "~/types";
+import { RepoDetail, User } from "~/types";
 
 export interface RepoDetailLayoutLoaderData {
   repo: RepoDetail;
