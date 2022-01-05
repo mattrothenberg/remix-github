@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Form, LoaderFunction, useLoaderData } from "remix";
 import { authenticator } from "~/services/auth.server";
 import { User } from "~/types";
@@ -20,11 +21,19 @@ export default function Index() {
   return (
     <div className="h-screen flex items-center justify-center">
       {user ? (
-        <Form action="/logout" method="post">
-          <button type="submit" className="btn-primary">
-            Logout
-          </button>
-        </Form>
+        <div className="text-center space-y-4">
+          <Form action="/logout" method="post">
+            <button type="submit" className="btn-primary">
+              Logout
+            </button>
+          </Form>
+          <p>
+            Or{" "}
+            <Link className="underline" to="dashboard">
+              view your dashboard!
+            </Link>
+          </p>
+        </div>
       ) : (
         <Form action="/auth/github" method="post">
           <button type="submit" className="btn-primary">
