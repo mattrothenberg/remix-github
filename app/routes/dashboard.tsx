@@ -1,7 +1,8 @@
-import { LoaderFunction, useLoaderData, Outlet, NavLink } from "remix";
+import { LoaderFunction, useLoaderData, Outlet, NavLink, Form } from "remix";
 import { GoEye, GoIssueOpened, GoRepoForked, GoStar } from "react-icons/go";
 import { requireUserSession } from "~/http.server";
 import { RepositoryList, User } from "~/types";
+import { LogoutIcon } from "@heroicons/react/solid";
 
 interface LoaderData {
   user: User;
@@ -73,7 +74,7 @@ export default function Dashboard() {
             })}
           </ul>
         </div>
-        <div className="border-t p-4 flex-shrink-0">
+        <div className="border-t p-4 flex-shrink-0 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <img
               className="w-8 h-8 rounded-full"
@@ -82,6 +83,11 @@ export default function Dashboard() {
             />
             <p className="text-sm">{data.user.displayName}</p>
           </div>
+          <Form method="post" action="/logout">
+            <button className="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center text-gray-600">
+              <LogoutIcon className="w-4" />
+            </button>
+          </Form>
         </div>
       </aside>
       <main className="flex flex-1">
