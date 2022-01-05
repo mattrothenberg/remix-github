@@ -12,12 +12,7 @@ interface LoaderData {
 export const loader: LoaderFunction = async ({ request }) => {
   const { user, client } = await requireUserSession(request);
   const { data } = await client.get(
-    `https://api.github.com/users/${user.displayName}/repos`,
-    {
-      headers: {
-        Authorization: `token ${user.accessToken}`,
-      },
-    }
+    `https://api.github.com/users/${user.displayName}/repos`
   );
   return {
     user,
