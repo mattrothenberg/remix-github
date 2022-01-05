@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { LoaderFunction, Outlet, useLoaderData } from "remix";
+import formatDistance from "date-fns/formatDistance";
 import { requireUserSession } from "~/http.server";
 import { IssueList, User } from "~/types";
 
@@ -33,7 +34,7 @@ export default function IssuesLayout() {
           New Issue
         </Link>
       </div>
-      <div className="p-4 bg-white shadow">
+      <div className="p-4 bg-white shadow rounded-md">
         {nonDependabot.length === 0 ? (
           <div className="p-4">
             <p className="text-center text-sm text-gray-600">
@@ -41,21 +42,27 @@ export default function IssuesLayout() {
             </p>
           </div>
         ) : (
-          <div className="p-4">
-            <ul className="divide-y">
-              {nonDependabot.map((issue) => {
-                return (
-                  <Link
-                    className="block p-2 text-sm"
-                    key={issue.number}
-                    to={`${issue.number}`}
-                  >
+          <ul className="divide-y">
+            {nonDependabot.map((issue) => {
+              return (
+                <li className="py-3 first:pt-0 last:pb-0" key={issue.number}>
+                  <Link className="hover:underline" to={`${issue.number}`}>
                     {issue.title}
                   </Link>
-                );
-              })}
-            </ul>
-          </div>
+                  <div className="text-xs mt-1 text-gray-600">
+                    <p>
+                      #{issue.number} opened{" "}
+                      {formatDistance(
+                        Date.parse(issue.created_at),
+                        new Date(),
+                        { addSuffix: true }
+                      )}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </div>
       <Outlet />
