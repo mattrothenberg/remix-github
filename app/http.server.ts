@@ -5,11 +5,11 @@ import { sessionStorage } from "./services/session.server";
 
 export async function requireUserSession(request: Request) {
   let user = await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
+    failureRedirect: "/",
   });
 
   if (!user) {
-    throw redirect("/login", 302);
+    throw redirect("/", 302);
   }
 
   const githubAxios = axios.create({
@@ -24,7 +24,7 @@ export async function requireUserSession(request: Request) {
     async function (error) {
       if (error.response.status === 401) {
         console.error(error);
-        throw redirect("/login", {
+        throw redirect("/", {
           headers: {
             "Set-Cookie": await sessionStorage.destroySession(
               await sessionStorage.getSession()

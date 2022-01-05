@@ -48,6 +48,16 @@ export default function Dashboard() {
             })}
           </ul>
         </div>
+        <div className="border-t p-4 flex-shrink-0">
+          <div className="flex items-center space-x-2">
+            <img
+              className="w-8 h-8 rounded-full"
+              src={data.user.avatar_url}
+              alt="avatar"
+            />
+            <p className="text-sm">{data.user.displayName}</p>
+          </div>
+        </div>
       </aside>
       <main className="flex flex-1">
         <Outlet />
