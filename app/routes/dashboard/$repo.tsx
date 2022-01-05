@@ -1,5 +1,11 @@
 import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
-import { LoaderFunction, useLoaderData, useParams, Link, Outlet } from "remix";
+import {
+  LoaderFunction,
+  useLoaderData,
+  useParams,
+  Outlet,
+  NavLink,
+} from "remix";
 import { requireUserSession } from "~/http.server";
 import { IssueList, RepoDetail, User } from "~/types";
 
@@ -37,8 +43,31 @@ export default function RepoDetailLayout() {
           {data.user.displayName} / {repo}
         </p>
       </div>
-      <div className="bg-white p-4 border-b flex-shrink-0">
-        <Link to="issues">Issues</Link>
+      <div className="bg-white border-b flex-shrink-0 flex">
+        <NavLink
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "border-blue-500"
+                : "border-transparent hover:border-gray-200"
+            } text-xs border-b-2  tracking-wide uppercase p-4 block`
+          }
+          to="issues"
+        >
+          Issues
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "border-blue-500"
+                : "border-transparent hover:border-gray-200"
+            } text-xs border-b-2  tracking-wide uppercase p-4 block`
+          }
+          to="pull-requests"
+        >
+          Pull Requests
+        </NavLink>
       </div>
       <div className="flex-1 h-full overflow-y-auto">
         <div className="p-4">

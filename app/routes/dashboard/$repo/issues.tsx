@@ -28,6 +28,11 @@ export default function IssuesLayout() {
 
   return (
     <>
+      <div className="mb-4 text-right">
+        <Link className="btn-primary w-auto" to="new">
+          New Issue
+        </Link>
+      </div>
       <div className="p-4 bg-white shadow">
         {nonDependabot.length === 0 ? (
           <div className="p-4">
