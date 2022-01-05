@@ -3,7 +3,7 @@ import { LoaderFunction, useLoaderData, useParams, Link, Outlet } from "remix";
 import { requireUserSession } from "~/http.server";
 import { IssueList, RepoDetail, User } from "~/types";
 
-interface LoaderData {
+export interface RepoDetailLayoutLoaderData {
   repo: RepoDetail;
   issues: IssueList;
   user: User;
@@ -30,8 +30,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   }
 };
 
-export default function RepoDetail() {
-  const data = useLoaderData<LoaderData>();
+export default function RepoDetailLayout() {
+  const data = useLoaderData<RepoDetailLayoutLoaderData>();
   const { repo } = useParams();
 
   return (
@@ -42,36 +42,7 @@ export default function RepoDetail() {
         </p>
       </div>
       <div className="flex-1 h-full overflow-y-auto">
-        <div className="p-4">
-          <div className="bg-white shadow rounded">
-            <div className="p-4 border-b">
-              <p className="text-sm text-gray-600">Open Issues</p>
-            </div>
-            {data.issues.length === 0 ? (
-              <div className="p-4">
-                <p className="text-center text-sm text-gray-600">
-                  No issues for this repository.
-                </p>
-              </div>
-            ) : (
-              <div className="p-4">
-                <ul className="divide-y">
-                  {data.issues.map((issue) => {
-                    return (
-                      <Link
-                        className="block p-2 text-sm"
-                        key={issue.id}
-                        to={`issues/${issue.id}`}
-                      >
-                        {issue.title}
-                      </Link>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
+        <Outlet context={data} />
       </div>
     </div>
   );
