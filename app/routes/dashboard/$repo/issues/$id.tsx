@@ -1,19 +1,17 @@
+import { XIcon } from "@heroicons/react/solid";
+import ReactMarkdown from "markdown-to-jsx";
+import { useEffect, useRef } from "react";
 import {
   ActionFunction,
-  Form,
   json,
   Link,
   LoaderFunction,
-  redirect,
   useFetcher,
   useLoaderData,
   useParams,
-  useTransition,
 } from "remix";
 import { requireUserSession } from "~/http.server";
 import { CommentList, IssueList, User } from "~/types";
-import { XIcon } from "@heroicons/react/solid";
-import { useEffect, useRef } from "react";
 
 interface LoaderData {
   issue: IssueList[0];
@@ -71,9 +69,9 @@ export default function IssueDetail() {
 
   const optimisticCommentList = [
     ...comments,
-    addComment.state === "submitting"
+    addComment.state === "submitting" || addComment.state === "loading"
       ? {
-          body: addComment.submission.formData.get("body"),
+          body: addComment?.submission?.formData.get("body"),
           user: { login: user.displayName },
           id: Math.random(),
         }
@@ -93,13 +91,30 @@ export default function IssueDetail() {
           </div>
         </header>
         <div className="flex-1 overflow-y-scroll">
-          <ul>
+          <ul className="p-4 space-y-4">
+            <li className="whitespace-pre-wrap break-words border">
+              <div className="p-2 bg-gray-50 border-b">
+                <p className="text-sm text-gray-600">{issue.user?.login}</p>
+              </div>
+              <div className="p-2 prose prose-sm prose-headings:mt-0 prose-headings:mb-1">
+                <ReactMarkdown>{issue.body || ""}</ReactMarkdown>
+              </div>
+            </li>
             {optimisticCommentList.map((comment) => {
               if (!comment) return null;
               return (
-                <li key={comment?.id} className="p-4">
-                  <p className="text-sm text-gray-600">{comment.user?.login}</p>
-                  <p className="text-sm">{comment.body}</p>
+                <li
+                  key={comment?.id}
+                  className="whitespace-pre-wrap break-words border"
+                >
+                  <div className="p-2 bg-gray-50 border-b">
+                    <p className="text-sm text-gray-600">
+                      {comment.user?.login}
+                    </p>
+                  </div>
+                  <div className="p-2 prose prose-sm prose-headings:mt-0 prose-headings:mb-1">
+                    <ReactMarkdown>{comment.body}</ReactMarkdown>
+                  </div>
                 </li>
               );
             })}

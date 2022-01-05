@@ -38,10 +38,13 @@ export default function Dashboard() {
               return (
                 <li key={repo.id}>
                   <Link
-                    className="block text-sm px-2 py-2 hover:bg-gray-50"
+                    className="flex justify-between items-center text-sm px-2 py-2 hover:bg-gray-50"
                     to={`${repo.name}`}
                   >
-                    {repo.name}
+                    <span className="flex-1">{repo.name}</span>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      {repo.open_issues_count}
+                    </span>
                   </Link>
                 </li>
               );
