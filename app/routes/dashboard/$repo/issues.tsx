@@ -22,33 +22,39 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export default function IssuesLayout() {
   const { issues } = useLoaderData<LoaderData>();
+  const nonDependabot = issues.filter(
+    (issue) => issue.user?.login !== "dependabot[bot]"
+  );
 
   return (
-    <div className="p-4 bg-white shadow">
-      {issues.length === 0 ? (
-        <div className="p-4">
-          <p className="text-center text-sm text-gray-600">
-            No issues for this repository.
-          </p>
-        </div>
-      ) : (
-        <div className="p-4">
-          <ul className="divide-y">
-            {issues.map((issue) => {
-              return (
-                <Link
-                  className="block p-2 text-sm"
-                  key={issue.id}
-                  to={`issues/${issue.id}`}
-                >
-                  {issue.title}
-                </Link>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+    <>
+      <div className="p-4 bg-white shadow">
+        {nonDependabot.length === 0 ? (
+          <div className="p-4">
+            <p className="text-center text-sm text-gray-600">
+              No issues for this repository.
+            </p>
+          </div>
+        ) : (
+          <div className="p-4">
+            <ul className="divide-y">
+              {nonDependabot.map((issue) => {
+                console.log(issue);
+                return (
+                  <Link
+                    className="block p-2 text-sm"
+                    key={issue.number}
+                    to={`${issue.number}`}
+                  >
+                    {issue.title}
+                  </Link>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
       <Outlet />
-    </div>
+    </>
   );
 }
