@@ -39,7 +39,6 @@ export default function IssuesLayout() {
           <div className="p-4">
             <ul className="divide-y">
               {nonDependabot.map((issue) => {
-                console.log(issue);
                 return (
                   <Link
                     className="block p-2 text-sm"
