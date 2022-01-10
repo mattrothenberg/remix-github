@@ -35,6 +35,7 @@ export default function Dashboard() {
               return (
                 <li key={repo.id}>
                   <NavLink
+                    prefetch="intent"
                     className={({ isActive }) =>
                       `${
                         isActive ? "bg-blue-700 text-white" : "hover:bg-gray-50"
